@@ -4,12 +4,13 @@ on: push
 jobs:
   staging:
     name: Staging
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "Migrating to staging server on branch $GITHUB_REF"
 
   production:
-    if: ${{ github.ref == 'refs/head/production' }}
+    if: ${{ github.ref == 'refs/heads/production' }}
     name: Production
     runs-on: ubuntu-latest
     steps:
