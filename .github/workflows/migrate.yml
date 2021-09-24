@@ -1,0 +1,17 @@
+# Migrate the database when something is pushed to main/master
+name: Migrate
+on: push
+jobs:
+  staging:
+    name: Staging
+    if: ${{ github.ref == 'refs/head/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Migrating to staging server on branch $GITHUB_REF"
+
+  production:
+    if: ${{ github.ref == 'refs/head/production' }}
+    name: Production
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Migrating to production server on branch $GITHUB_REF"
